@@ -16,10 +16,10 @@ branches:
    - development
 before_script:
   - npm install -g @angular/cli
-  
+
 script:
   - ng build --prod --base-href https://yctong.github.io/bitcoin-order-app/
-  
+
 deploy:
   provider: pages
   skip_cleanup: true
@@ -28,3 +28,8 @@ deploy:
   edge: true
   on:
     branch: development
+
+after_success:
+  - git push origin :development
+  - ng lint
+  - npm audit fix
